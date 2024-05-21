@@ -1,29 +1,39 @@
 package com;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
 public class Maraton {
 
-    public void main
+    public static void main(String[] args) {
 
-    public String solution(String[] participant, String[] completion) {
+        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+        String[] completion = {"stanko", "ana", "mislav"};
+
         String answer = "";
 
-        HashMap<Integer, String> hm = new HashMap<>();
-        //hashmap에 참가자 담기
-        for (int i = 0; i < participant.length; i++) {
-            hm.put(i, participant[i]);
+        HashMap<String, Integer> hm = new HashMap<>();
+
+        for(int i = 0; i < participant.length; i++) {
+            hm.put(participant[i], hm.getOrDefault(participant[i], 0) + 1);
         }
-        for (int k = 0; k < completion.length; k++) {
-            if (hm.containsValue(completion[k])) {
-                hm.remove(completion[k]);
+//        System.out.println(hm);
+        for(int j = 0; j < completion.length; j++) {
+            hm.put(completion[j], hm.get(completion[j]) - 1);
+        }
+
+        for(String answer2 : hm.keySet()) {
+            if (hm.get(answer2) != 0) {
+                answer = answer2;
+                break;
             }
         }
-        answer = hm.get(0);
 
-        return answer;
+        System.out.println(answer);
+
 
     }
 }
+
+
+
+
